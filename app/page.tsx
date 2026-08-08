@@ -88,21 +88,16 @@ export default function Home() {
       <main id="work" className="stage" aria-label="Selected portfolio projects">
         <p className="scroll-note" aria-hidden="true">scroll to explore ↓</p>
         {projects.map((project, index) => {
-          const distance = index - progress;
           const phase = progress - index;
-          const scale = Math.max(
-            0.07,
-            Math.min(9.75, 0.23 * 1.3 * 1.5 * Math.pow(1.55, phase)),
-          );
-          const pastOpacity =
-            phase > 1.1 ? Math.max(0, 1 - (phase - 1.1) / 0.85) : 1;
-          const futureOpacity =
-            distance > 0 ? Math.max(0, 0.68 - distance * 0.15) : 1;
-          const opacity = pastOpacity * futureOpacity;
-          const stackDepth = Math.max(0, Math.min(4, distance));
-          const stackX = (index % 2 === 0 ? -1 : 1) * stackDepth * 6;
-          const stackY = stackDepth * 8;
-          const blur = distance > 2 ? Math.min(1.5, (distance - 2) * 0.45) : 0;
+          const activeProgress = Math.max(0, Math.min(1, phase));
+          const scale = 0.23 * 1.3 * 1.5 * Math.pow(3.2, activeProgress);
+          const opacity =
+            phase <= 0.72
+              ? 1
+              : phase >= 1
+                ? 0
+                : 1 - (phase - 0.72) / 0.28;
+          const labelOpacity = phase >= 0 && phase < 1 ? opacity : 0;
 
           return (
             <article
@@ -110,14 +105,15 @@ export default function Home() {
               id={`project-${index + 1}`}
               key={project.title}
               style={{
-                filter: `blur(${blur}px)`,
                 opacity,
-                transform: `translate(calc(-50% + ${stackX}px), calc(-50% + ${stackY}px)) scale(${scale})`,
+                transform: `translate(-50%, -50%) scale(${scale})`,
                 zIndex: projects.length - index,
               }}
             >
               <div className="project-content">
-                <span className="project-title">{project.title}</span>
+                <span className="project-title" style={{ opacity: labelOpacity }}>
+                  {project.title}
+                </span>
                 <span className="project-preview">
                   {project.image ? (
                     <Image
@@ -132,10 +128,14 @@ export default function Home() {
                   )}
                 </span>
                 {project.credit && (
-                  <span className="project-credit">{project.credit}</span>
+                  <span className="project-credit" style={{ opacity: labelOpacity }}>
+                    {project.credit}
+                  </span>
                 )}
                 {project.description && (
-                  <span className="project-description">{project.description}</span>
+                  <span className="project-description" style={{ opacity: labelOpacity }}>
+                    {project.description}
+                  </span>
                 )}
               </div>
             </article>

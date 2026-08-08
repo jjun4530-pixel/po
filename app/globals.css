@@ -79,16 +79,19 @@ nav a { text-underline-offset: 0.18em; }
 
 .project-card {
   position: absolute;
-  top: 47%;
+  top: 50%;
   left: 50%;
-  width: min(72vw, 760px);
+  width: auto;
+  height: min(54vh, 46vw, 560px);
   transform-origin: center;
-  transition: filter 120ms linear, opacity 120ms linear;
-  will-change: filter, transform, opacity;
+  transition: opacity 120ms linear;
+  will-change: transform, opacity;
 }
 
 .project-content {
-  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .project-title,
@@ -97,22 +100,41 @@ nav a { text-underline-offset: 0.18em; }
   font-size: clamp(0.72rem, 1.25vw, 1rem);
 }
 
-.project-title { margin-bottom: 0.35rem; text-decoration: underline; text-underline-offset: 0.18em; }
-.project-credit { margin-top: 0.4rem; text-align: right; }
+.project-title {
+  position: absolute;
+  bottom: calc(100% + 0.35rem);
+  left: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  transition: opacity 120ms linear;
+}
+
+.project-credit {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  text-align: right;
+  transition: opacity 120ms linear;
+}
 
 .project-description {
   display: block;
+  position: absolute;
+  top: calc(100% + 1.8rem);
+  left: 0;
+  width: min(36rem, 80vw);
   max-width: 36rem;
-  margin-top: 0.4rem;
   font-size: clamp(0.72rem, 1.1vw, 0.95rem);
   line-height: 1.35;
+  transition: opacity 120ms linear;
 }
 
 .project-preview {
   position: relative;
   display: grid;
   place-items: center;
-  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   border: 1px solid var(--hairline);
   background: var(--paper);
@@ -151,12 +173,9 @@ nav a { text-underline-offset: 0.18em; }
 .project-frame .project-preview { box-shadow: inset 0 0 0 2rem var(--ink); }
 .project-frame .project-preview span { padding: 1rem 1.5rem; background: var(--paper); }
 
-.project-altal {
-  width: min(42vw, 520px);
-}
+.project-altal { aspect-ratio: 3 / 4; }
 
 .project-altal .project-preview {
-  aspect-ratio: 3 / 4;
   border: 0;
 }
 
@@ -164,20 +183,20 @@ nav a { text-underline-offset: 0.18em; }
   object-fit: cover;
 }
 
-.project-irodori { width: min(46vw, 560px); }
-.project-irodori .project-preview { aspect-ratio: 1040 / 1200; border: 0; }
+.project-irodori { aspect-ratio: 1040 / 1200; }
+.project-irodori .project-preview { border: 0; }
 
-.project-born { width: min(72vw, 860px); }
-.project-born .project-preview { aspect-ratio: 3 / 2; border: 0; }
+.project-born { aspect-ratio: 3 / 2; }
+.project-born .project-preview { border: 0; }
 
-.project-sawaya { width: min(76vw, 900px); }
-.project-sawaya .project-preview { aspect-ratio: 1400 / 745; border: 0; }
+.project-sawaya { aspect-ratio: 1400 / 745; }
+.project-sawaya .project-preview { border: 0; }
 
-.project-art-brut { width: min(60vw, 720px); }
-.project-art-brut .project-preview { aspect-ratio: 75 / 64; border: 0; }
+.project-art-brut { aspect-ratio: 75 / 64; }
+.project-art-brut .project-preview { border: 0; }
 
-.project-flower-lettering { width: min(42vw, 520px); }
-.project-flower-lettering .project-preview { aspect-ratio: 849 / 1200; border: 0; }
+.project-flower-lettering { aspect-ratio: 849 / 1200; }
+.project-flower-lettering .project-preview { border: 0; }
 
 .project-irodori .project-preview img,
 .project-born .project-preview img,
@@ -199,13 +218,7 @@ nav a { text-underline-offset: 0.18em; }
   .site-footer { grid-template-columns: 1fr; }
   .site-header nav,
   .site-footer nav { margin-top: 0.75rem; }
-  .project-card { width: 86vw; }
-  .project-altal { width: 78vw; }
-  .project-irodori,
-  .project-flower-lettering { width: 74vw; }
-  .project-born,
-  .project-sawaya { width: 92vw; }
-  .project-art-brut { width: 84vw; }
+  .project-card { width: auto; height: min(52vh, 46vw, 460px); }
   .scroll-note { font-size: 0.7rem; }
 }
 

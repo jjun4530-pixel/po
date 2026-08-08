@@ -164,6 +164,29 @@ nav a { text-underline-offset: 0.18em; }
   object-fit: cover;
 }
 
+.project-irodori { width: min(46vw, 560px); }
+.project-irodori .project-preview { aspect-ratio: 1040 / 1200; border: 0; }
+
+.project-born { width: min(72vw, 860px); }
+.project-born .project-preview { aspect-ratio: 3 / 2; border: 0; }
+
+.project-sawaya { width: min(76vw, 900px); }
+.project-sawaya .project-preview { aspect-ratio: 1400 / 745; border: 0; }
+
+.project-art-brut { width: min(60vw, 720px); }
+.project-art-brut .project-preview { aspect-ratio: 75 / 64; border: 0; }
+
+.project-flower-lettering { width: min(42vw, 520px); }
+.project-flower-lettering .project-preview { aspect-ratio: 849 / 1200; border: 0; }
+
+.project-irodori .project-preview img,
+.project-born .project-preview img,
+.project-sawaya .project-preview img,
+.project-art-brut .project-preview img,
+.project-flower-lettering .project-preview img {
+  object-fit: cover;
+}
+
 .site-footer {
   position: fixed;
   top: 50%;
@@ -178,7 +201,11 @@ nav a { text-underline-offset: 0.18em; }
   .site-footer nav { margin-top: 0.75rem; }
   .project-card { width: 86vw; }
   .project-altal { width: 78vw; }
-  .project-preview { aspect-ratio: 4 / 3; }
+  .project-irodori,
+  .project-flower-lettering { width: 74vw; }
+  .project-born,
+  .project-sawaya { width: 92vw; }
+  .project-art-brut { width: 84vw; }
   .scroll-note { font-size: 0.7rem; }
 }
 

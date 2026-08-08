@@ -9,13 +9,39 @@ const projects = [
     credit: "Branding · 2025",
     description: "술을 잘 못하는 사람들이 사회적 교류를 하기 위한 목테일 브랜드",
     image: "/projects/altal/cover.jpg",
+    alt: "ALTAL 목테일 브랜드의 다채로운 잔을 함께 들고 있는 사람들",
     kind: "altal",
   },
-  { title: "Project One", credit: "Identity / Direction", kind: "grid" },
-  { title: "Project Two", credit: "Digital / Experience", kind: "type" },
-  { title: "Project Three", credit: "Editorial / Archive", kind: "lines" },
-  { title: "Project Four", credit: "Object / Research", kind: "circle" },
-  { title: "Project Five", credit: "Campaign / Image", kind: "frame" },
+  {
+    title: "이로도리",
+    image: "/projects/irodori/cover.jpg",
+    alt: "초록색 자연 모티프와 일본어, Irodori 영문 로고로 구성된 그래픽",
+    kind: "irodori",
+  },
+  {
+    title: "BŌRN",
+    image: "/projects/born/cover.jpg",
+    alt: "붉은 오브제와 인물 사진이 반복되는 BŌRN 옥외 브랜드 이미지",
+    kind: "born",
+  },
+  {
+    title: "사와야",
+    image: "/projects/sawaya/cover.jpg",
+    alt: "색상 단계별 캐릭터와 튜브 패키지로 구성된 SAWAYA 브랜드 이미지",
+    kind: "sawaya",
+  },
+  {
+    title: "아르브뤼",
+    image: "/projects/art-brut/cover.jpg",
+    alt: "파랑, 분홍, 빨강, 초록, 주황색으로 변주된 아르브뤼 심볼",
+    kind: "art-brut",
+  },
+  {
+    title: "꽃편지체",
+    image: "/projects/flower-lettering/cover.jpg",
+    alt: "세로쓰기 한글과 수상 정보가 담긴 꽃편지체 타이포그래피 포스터",
+    kind: "flower-lettering",
+  },
 ];
 
 export default function Home() {
@@ -66,7 +92,7 @@ export default function Home() {
           const phase = progress - index;
           const scale = Math.max(
             0.07,
-            Math.min(6.5, 0.23 * 1.3 * Math.pow(1.55, phase)),
+            Math.min(9.75, 0.23 * 1.3 * 1.5 * Math.pow(1.55, phase)),
           );
           const pastOpacity =
             phase > 1.1 ? Math.max(0, 1 - (phase - 1.1) / 0.85) : 1;
@@ -92,20 +118,22 @@ export default function Home() {
             >
               <div className="project-content">
                 <span className="project-title">{project.title}</span>
-                <span className="project-preview" aria-hidden="true">
+                <span className="project-preview">
                   {project.image ? (
                     <Image
-                      alt="ALTAL 목테일 브랜드의 다채로운 잔을 함께 들고 있는 사람들"
+                      alt={project.alt}
                       fill
                       priority={index === 0}
-                      sizes="(max-width: 640px) 78vw, 520px"
+                      sizes="(max-width: 640px) 90vw, 860px"
                       src={project.image}
                     />
                   ) : (
                     <span>{project.title}</span>
                   )}
                 </span>
-                <span className="project-credit">{project.credit}</span>
+                {project.credit && (
+                  <span className="project-credit">{project.credit}</span>
+                )}
                 {project.description && (
                   <span className="project-description">{project.description}</span>
                 )}

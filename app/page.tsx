@@ -1,9 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const projects = [
-  { title: "Selected Works", credit: "Portfolio / 2026", kind: "intro" },
+  {
+    title: "ALTAL",
+    credit: "Branding · 2025",
+    description: "술을 잘 못하는 사람들이 사회적 교류를 하기 위한 목테일 브랜드",
+    image: "/projects/altal/cover.jpg",
+    kind: "altal",
+  },
   { title: "Project One", credit: "Identity / Direction", kind: "grid" },
   { title: "Project Two", credit: "Digital / Experience", kind: "type" },
   { title: "Project Three", credit: "Editorial / Archive", kind: "lines" },
@@ -63,6 +70,7 @@ export default function Home() {
           return (
             <article
               className={`project-card project-${project.kind}`}
+              id={`project-${index + 1}`}
               key={project.title}
               style={{
                 opacity,
@@ -70,13 +78,26 @@ export default function Home() {
                 zIndex: projects.length - index,
               }}
             >
-              <a href={`#project-${index + 1}`} aria-label={`${project.title} project`}>
+              <div className="project-content">
                 <span className="project-title">{project.title}</span>
                 <span className="project-preview" aria-hidden="true">
-                  <span>{project.kind === "intro" ? "A growing archive of ideas, images, and experiments." : project.title}</span>
+                  {project.image ? (
+                    <Image
+                      alt="ALTAL 목테일 브랜드의 다채로운 잔을 함께 들고 있는 사람들"
+                      fill
+                      priority={index === 0}
+                      sizes="(max-width: 640px) 78vw, 520px"
+                      src={project.image}
+                    />
+                  ) : (
+                    <span>{project.title}</span>
+                  )}
                 </span>
                 <span className="project-credit">{project.credit}</span>
-              </a>
+                {project.description && (
+                  <span className="project-description">{project.description}</span>
+                )}
+              </div>
             </article>
           );
         })}

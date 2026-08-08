@@ -12,7 +12,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: "Times New Roman", Times, serif;
+  font-family: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
 }
 
 a { color: inherit; }
@@ -43,7 +43,7 @@ a { color: inherit; }
 h1,
 h2 {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: inherit;
   font-size: clamp(2.7rem, 6.4vw, 5.2rem);
   font-weight: 400;
   line-height: 0.9;
@@ -126,7 +126,7 @@ nav a { text-underline-offset: 0.18em; }
   background-size: 2.5rem 2.5rem;
 }
 
-.project-type .project-preview { font-family: Arial, Helvetica, sans-serif; text-transform: uppercase; letter-spacing: -0.08em; }
+.project-type .project-preview { font-family: inherit; text-transform: uppercase; letter-spacing: -0.08em; }
 
 .project-lines .project-preview::before {
   content: "";

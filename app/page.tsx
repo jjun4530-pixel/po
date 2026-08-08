@@ -63,9 +63,20 @@ export default function Home() {
         <p className="scroll-note" aria-hidden="true">scroll to explore ↓</p>
         {projects.map((project, index) => {
           const distance = index - progress;
-          const scale = Math.max(0.115, Math.min(5, 0.23 * Math.pow(1.55, -distance)));
-          const passed = distance < -2.15;
-          const opacity = passed ? 0 : Math.max(0.16, Math.min(1, 1.25 - distance * 0.12));
+          const phase = progress - index;
+          const scale = Math.max(
+            0.07,
+            Math.min(6.5, 0.23 * 1.3 * Math.pow(1.55, phase)),
+          );
+          const pastOpacity =
+            phase > 1.1 ? Math.max(0, 1 - (phase - 1.1) / 0.85) : 1;
+          const futureOpacity =
+            distance > 0 ? Math.max(0, 0.68 - distance * 0.15) : 1;
+          const opacity = pastOpacity * futureOpacity;
+          const stackDepth = Math.max(0, Math.min(4, distance));
+          const stackX = (index % 2 === 0 ? -1 : 1) * stackDepth * 6;
+          const stackY = stackDepth * 8;
+          const blur = distance > 2 ? Math.min(1.5, (distance - 2) * 0.45) : 0;
 
           return (
             <article
@@ -73,8 +84,9 @@ export default function Home() {
               id={`project-${index + 1}`}
               key={project.title}
               style={{
+                filter: `blur(${blur}px)`,
                 opacity,
-                transform: `translate(-50%, -50%) scale(${scale})`,
+                transform: `translate(calc(-50% + ${stackX}px), calc(-50% + ${stackY}px)) scale(${scale})`,
                 zIndex: projects.length - index,
               }}
             >

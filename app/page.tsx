@@ -81,8 +81,11 @@ export default function Home() {
           : clamp((scrollY - 400 + index * 100) / 6500);
         const morph = progress * progress * (3 - 2 * progress);
         // One open line: left horizon, frame top, then right horizon.
-        // Only the top midpoint moves; the sides and open bottom stay fixed.
-        const points = [[-300,100],[0,100],[0,0],[50,48*morph],[100,0],[100,100],[400,100]];
+        // A shallow valley: lift the shoulders slightly and lower the center gently.
+        // The horizon and open bottom remain fixed throughout the scroll.
+        const shoulder = -6 * morph;
+        const center = 8 * morph;
+        const points = [[-300,100],[0,100],[0,shoulder],[50,center],[100,shoulder],[100,100],[400,100]];
         project.querySelector(".frame-outline polyline")?.setAttribute("points", points.map(point => point.join(",")).join(" "));
         const fadeStart = 2800 + index * 1000;
         project.style.setProperty(

@@ -168,7 +168,7 @@ main {
 .project-title,
 .project-author {
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   padding: 1rem;
   font-size: 2.5rem;
 }
@@ -176,7 +176,8 @@ main {
 .project-title {
   top: 0;
   left: 0;
-  width: calc(100% - 4rem);
+  width: fit-content;
+  max-width: calc(100% - 5rem);
   color: var(--accent);
   text-decoration: underline dotted 2px;
   text-underline-offset: 4px;

@@ -67,9 +67,8 @@ export default function Home() {
       root.style.setProperty("--scroll", `${scrollY}px`);
       root.style.setProperty(
         "--footer-opacity",
-        `${clamp((scrollY - 9300) / 500)}`,
+        `${clamp((scrollY - 7900) / 100)}`,
       );
-      root.style.setProperty("--final-m-opacity", `${clamp((scrollY - 7700) / 500) * (1 - clamp((scrollY - 9100) / 500))}`);
       root.style.setProperty(
         "--mobile-project-height",
         `${Math.min(640, Math.floor(window.innerHeight * 0.85))}px`,
@@ -81,10 +80,10 @@ export default function Home() {
           ? clamp((index + clamp(1 - project.getBoundingClientRect().top / window.innerHeight)) / projects.length)
           : clamp((scrollY - 400 + index * 100) / 6500);
         const morph = progress * progress * (3 - 2 * progress);
-        // Matching vertices keep the rectangle-to-M outline continuous in both directions.
-        const points = [[0,0],[24,0],[50,48*morph],[76,0],[100,0],[100,100],[76,100],[76,100-58*morph],[50,100-26*morph],[24,100-58*morph],[24,100],[0,100]];
-        project.style.setProperty("--frame-clip", `polygon(${points.map(([x,y]) => `${x}% ${y}%`).join(",")})`);
-        project.querySelector(".frame-outline polygon")?.setAttribute("points", points.map(point => point.join(",")).join(" "));
+        // One open line: left horizon, frame top, then right horizon.
+        // Only the top midpoint moves; the sides and open bottom stay fixed.
+        const points = [[-300,100],[0,100],[0,0],[50,48*morph],[100,0],[100,100],[400,100]];
+        project.querySelector(".frame-outline polyline")?.setAttribute("points", points.map(point => point.join(",")).join(" "));
         const fadeStart = 2800 + index * 1000;
         project.style.setProperty(
           "--project-opacity",
@@ -130,7 +129,7 @@ export default function Home() {
             } as React.CSSProperties}
           >
             <svg className="frame-outline" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-              <polygon points="0,0 24,0 50,0 76,0 100,0 100,100 76,100 76,100 50,100 24,100 24,100 0,100" />
+              <polyline points="-300,100 0,100 0,0 50,0 100,0 100,100 400,100" />
             </svg>
             <span className="project-title">{project.title}</span>
             <span className="project-author">Minjoon Choi</span>
@@ -153,9 +152,6 @@ export default function Home() {
             </div>
           </article>
         ))}
-        <div className="final-m" aria-hidden="true">
-          <svg viewBox="0 0 100 100"><path d="M0 0H24L50 48 76 0H100V100H76V42L50 74 24 42V100H0Z" /></svg>
-        </div>
       </main>
 
       <footer id="about" className="site-footer">
